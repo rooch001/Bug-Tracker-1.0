@@ -16,8 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 import dashboard.views as dashView
+import accounts.views as accView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', dashView.home, name='home')
+    path('', accView.login, name='login'),
+    path('dashboard/', dashView.home, name='home'),
+
+
+    # path('', dashView.home, name='dashboard'),
+
 ]
