@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Bug Tracker-login</title>
+  <title>Bug Tracker-Login</title>
 
   <!-- Custom fonts for this template-->
   <link href={% static 'vendor/fontawesome-free/css/all.min.css' %} rel="stylesheet" type="text/css">
@@ -34,14 +34,18 @@
               <div class="row">
                 <div class="col-md-9 col-lg-8 mx-auto">
                   <h3 class="login-heading mb-4">Welcome back!</h3>
-                  <form>
+                  {% if error %}
+                  <p class="text-danger">{{ error }}</p>
+                  {% endif %}
+                  <form method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
                     <div class="form-label-group">
-                      <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                      <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
                       <label for="inputEmail">Email address</label>
                     </div>
 
                     <div class="form-label-group">
-                      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                      <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
                       <label for="inputPassword">Password</label>
                     </div>
 
