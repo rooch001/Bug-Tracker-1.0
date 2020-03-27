@@ -51,7 +51,7 @@
 
       <!-- Add Project -->
       <li class="nav-item">
-        <a data-toggle="modal" data-target="#addproject" class="nav-link" href="">
+        <a class="nav-link" href="addproject">
           <i class="fas fa-plus-square"></i>
           <span>Add Project</span></a>
       </li>
@@ -471,49 +471,6 @@
         </div>
       </div>
     </div>
-    <!-- Modal -->
-    <div class="modal fade" id="addproject" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-      aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title" id="exampleModalLabel">Add-Project</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form>
-              <div class="form-group">
-                <label for="project-name" class="col-form-label">Project Name:</label>
-                <input type="text" class="form-control" id="project-name">
-              </div>
-              <div class="form-group">
-                <label for="project-id" class="col-form-label">Project-Id:</label>
-                <input type="text" class="form-control" id="project-id">
-                <p class="text-info">A Project-Id is a unique identifier of your Project</p>
-              </div>
-              <div class="form-group">
-                <label for="start-date" class="col-form-label">Start-Date:</label>
-                <input type="date" class="form-control" id="start-date">
-              </div>
-              <div class="form-group">
-                <label for="dead-line" class="col-form-label">Dead-Line:</label>
-                <input type="date" class="form-control" id="dead-line">
-              </div>
-              <div class="form-group">
-                <label for="project-Description" class="col-form-label">Project-Description:</label>
-                <textarea class="form-control" id="project-description"></textarea>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <a class="btn btn-primary" href="addproject.html">Add Project</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- Bootstrap core JavaScript-->
     <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
     <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
