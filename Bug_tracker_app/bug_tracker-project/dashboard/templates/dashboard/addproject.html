@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Add Project</title>  
+  <title>Add Project</title>
 
   <!-- Custom fonts for this template-->
   <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
@@ -104,12 +104,12 @@
           <span>Manage Projects</span></a>
       </li>
 
-
+      <!-- Divider -->
+      <hr class="sidebar-divider d-none d-md-block">
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
     </ul>
-
-    <!-- Divider -->
-
-    <!-- <hr class="sidebar-divider my-0"> -->
 
 
     <!-- End of Sidebar -->
@@ -312,7 +312,7 @@
               </div>
             </div>
             <div class="form-group">
-              <label for="description">Description</label> 
+              <label for="description">Description</label>
             </div>
             {% comment %}  CK editor  {% endcomment %}
             <textarea name="editor1" id="editor1" rows="10" cols="111"></textarea>
