@@ -13,7 +13,7 @@ def home(request):
             return render(request, 'dashboard/home.html', {'account':account})
         except:
             auth.logout(request)
-            return render(request, 'accounts/login.html', {'error':'Your Profile Details are not ready'})
+            return render(request, 'accounts/login.html', {'error':'Your profile details are not ready'})
     else:
         return redirect('login')
 
