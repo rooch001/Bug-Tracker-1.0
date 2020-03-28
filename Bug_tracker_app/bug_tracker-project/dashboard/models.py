@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+from accounts.models import Account
 
 # Create your models here.
 class Project(models.Model):
@@ -9,3 +11,7 @@ class Project(models.Model):
     additional_file     =   models.FileField(upload_to='files/additional_file/')
     date_of_initiation  =   models.DateField()
     deadline            =   models.DateField()
+
+class Member_Mapping(models.Model):
+    project_id          =   models.ForeignKey(Project, on_delete=models.CASCADE)
+    email               =   models.ForeignKey(Account, on_delete=models.CASCADE)
