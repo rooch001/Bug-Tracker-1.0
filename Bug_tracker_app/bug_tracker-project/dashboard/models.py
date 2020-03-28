@@ -13,5 +13,5 @@ class Project(models.Model):
     deadline            =   models.DateField()
 
 class Member_Mapping(models.Model):
-    project_id          =   models.ForeignKey(Project, on_delete=models.CASCADE, primary_key=True)
-    email               =   models.ForeignKey(Account, on_delete=models.CASCADE, primary_key=True)
+    project_id          =   models.ForeignKey(Project, on_delete=models.CASCADE)
+    email               =   models.ForeignKey(Account, on_delete=models.CASCADE)
