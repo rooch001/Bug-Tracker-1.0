@@ -14,6 +14,9 @@ class Project(models.Model):
     date_of_initiation = models.DateField()
     deadline = models.DateField()
 
+    def __str__(self):
+        return self.project_name + "-" + str(self.project_id)
+
 
 class Member_Mapping(models.Model):
     project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
