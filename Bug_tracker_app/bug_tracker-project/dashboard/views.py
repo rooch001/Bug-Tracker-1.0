@@ -1,23 +1,25 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib import auth
-from django.contrib.auth.models import User
 from accounts.models import Account
 from dashboard.models import Project
-
 
 def home(request):
     if request.user.is_authenticated:
         current_user = request.user
+<<<<<<< HEAD
         try:
             account = get_object_or_404(Account, email=current_user)
             return render(request, 'dashboard/home.html', {'account': account})
         except:
             auth.logout(request)
             return render(request, 'accounts/login.html', {'error': 'Your profile details are not ready'})
+=======
+        account = get_object_or_404(Account, email=current_user)
+        return render(request, 'dashboard/home.html', {'account':account})
+>>>>>>> 86075ae4e5687e75beaa7dec9776be6dbf374cef
     else:
         return redirect('login')
-
 
 def addproject(request):
     if request.method == "POST":
