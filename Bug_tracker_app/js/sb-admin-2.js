@@ -55,5 +55,8 @@
     modal.find('.modal-title').text('New message to ' + recipient)
     modal.find('.modal-body input').val(recipient)
   })
+  $('.datepicker').datepicker({
+    format: 'yy/mm/dd'
+  });
 
 })(jQuery); // End of use strict
