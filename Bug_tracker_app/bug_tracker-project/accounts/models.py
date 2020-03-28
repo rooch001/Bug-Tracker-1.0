@@ -7,7 +7,7 @@ class Account(models.Model):
     last_name   = models.CharField(max_length=30)
     age         = models.IntegerField()
     mobile      = models.CharField(max_length=13)
-    job_title   = models.CharField(max_length=15)
+    job_title   = models.CharField(max_length=30)
     email       = models.ForeignKey(User, on_delete=models.CASCADE)
     photo       = models.ImageField(upload_to='images/photos/')
     address     = models.TextField(max_length=100)
