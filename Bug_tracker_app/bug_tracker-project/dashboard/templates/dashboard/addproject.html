@@ -325,21 +325,29 @@
             {% comment %} CK editor {% endcomment %}
             <textarea name="editor1" rows="10" cols="111"></textarea>
             <br />
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Upload</span>
-              </div>
-              <div class="custom-file">
-                <input type="file" class="custom-file-input" name="inputGroupFile01">
-                <label class="custom-file-label" for="inputGroupFile01">Choose Project File</label>
-              </div>
+            {% comment %} <div class="form-group">
+              <label for="exampleFormControlFile1">Project File</label>
+              <input type="file" class="form-control-file" id="exampleFormControlFile1" name="input01">
             </div>
+            <div class="form-group">
+              <label for="exampleFormControlFile1">Additional File</label>
+              <input type="file" class="form-control-file" id="exampleFormControlFile1" name="input01">
+            </div> {% endcomment %}
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Upload</span>
+              </div>
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" name="input01">
+                  <label class="custom-file-label" for="inputGroupFile01">Choose Project File</label>
+                </div>
+             </div>
             <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text">Upload</span>
               </div>
               <div class="custom-file">
-                <input type="file" class="custom-file-input" name="inputGroupFile02">
+                <input type="file" class="custom-file-input" name="input02">
                 <label class="custom-file-label" for="inputGroupFile02">Choose Additional File</label>
               </div>
             </div>
