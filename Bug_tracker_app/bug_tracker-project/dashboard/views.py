@@ -19,4 +19,6 @@ def home(request):
 
 
 def addproject(request):
-    return render(request, 'dashboard/addproject.html')
+    current_user = request.user
+    account = get_object_or_404(Account, email=current_user)
+    return render(request, 'dashboard/addproject.html', {'account':account})
