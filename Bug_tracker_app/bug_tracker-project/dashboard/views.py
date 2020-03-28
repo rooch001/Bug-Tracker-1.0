@@ -17,9 +17,10 @@ def home(request):
         return redirect('login')
 
 def addproject(request):
+    current_user = request.user
+    account = get_object_or_404(Account, email=current_user)
     if request.method == "POST":
         project = Project()
-
         project.project_name = request.POST["project_name"]
         project.description = request.POST["editor1"]
         project.project_file = request.FILES["input01"]
@@ -27,7 +28,7 @@ def addproject(request):
         project.date_of_initiation = request.POST['start_date']
         project.deadline = request.POST['dead_line']
         project.save()
-        return render(request, 'dashboard/addproject.html')
+        return render(request, 'dashboard/addproject.html', {'account': account})
     else:
         current_user = request.user
         account = get_object_or_404(Account, email=current_user)
