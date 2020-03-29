@@ -23,8 +23,11 @@ def addproject(request):
         project = Project()
         project.project_name = request.POST["project_name"]
         project.description = request.POST["editor1"]
-        project.project_file = request.FILES["input01"]
-        project.additional_file = request.FILES["input02"]
+        project.project_file = request.FILES["projectFile"]
+        try:
+            project.additional_file = request.FILES["additionalFile"]
+        except:
+            project.additional_file = None
         project.date_of_initiation = request.POST['start_date']
         project.deadline = request.POST['dead_line']
         project.save()

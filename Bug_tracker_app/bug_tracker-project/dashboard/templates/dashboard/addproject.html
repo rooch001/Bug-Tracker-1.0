@@ -28,6 +28,7 @@
     });
   </script>
   {% endif %}
+
 </head>
 
 <body id="page-top">
@@ -319,7 +320,7 @@
         </nav>
 
         <div class="modal fade" id="project_added_modal" tabindex="-1" role="dialog" aria-labelledby="project_added_modal"
-          aria-hidden="true">
+          aria-hidden="true" data-backdrop="static" data-keyboard="false">
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
               <div class="modal-header">
@@ -328,11 +329,11 @@
                   <span aria-hidden="true">×</span>
                 </button>
               </div>
-              <div class="modal-body">{{ project.project_name }} Project added successfully with Project Id - {{ project.project_id }}</div>
+              <div class="modal-body">Project added successfully. [Id - {{project.project_id }}]</div>
               <div class="modal-footer">
-                <button class="btn btn-success" type="button" data-dismiss="modal">Ok</button>
-                <a class="btn btn-primary" href="">Add Project Members</a>
-                <a class="btn btn-secondary" href="{% url 'home' %}">Dashboard</a>
+                <a class="btn btn-outline-warning" href="{% url 'addproject' %}">Add another project</a>
+                <a class="btn btn-outline-primary" href="">Go to Project Manager</a>
+                <a class="btn btn-outline-secondary" href="{% url 'home' %}">Dashboard</a>
               </div>
             </div>
           </div>
@@ -344,29 +345,21 @@
             <div class="form-row">
               <div class="form-group col">
                 <label for="project-name">Project</label>
-                <input type="text" class="form-control" name="project_name" placeholder="Eg : BugTracker">
+                <input type="text" class="form-control" name="project_name" placeholder="Eg : BugTracker" required>
               </div>
             </div>
             <div class="form-group">
               <label for="description">Description</label>
             </div>
             {% comment %} CK editor {% endcomment %}
-            <textarea name="editor1" rows="10" cols="111"></textarea>
+            <textarea name="editor1" rows="10" cols="111" required></textarea>
             <br />
-            {% comment %} <div class="form-group">
-              <label for="exampleFormControlFile1">Project File</label>
-              <input type="file" class="form-control-file" id="exampleFormControlFile1" name="input01">
-            </div>
-            <div class="form-group">
-              <label for="exampleFormControlFile1">Additional File</label>
-              <input type="file" class="form-control-file" id="exampleFormControlFile1" name="input01">
-            </div> {% endcomment %}
             <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text">Upload</span>
               </div>
                 <div class="custom-file">
-                  <input type="file" class="custom-file-input" name="input01">
+                  <input type="file" class="custom-file-input" name="projectFile" required>
                   <label class="custom-file-label" for="inputGroupFile01">Choose Project File</label>
                 </div>
              </div>
@@ -375,18 +368,18 @@
                 <span class="input-group-text">Upload</span>
               </div>
               <div class="custom-file">
-                <input type="file" class="custom-file-input" name="input02">
+                <input type="file" class="custom-file-input" name="additionalFile">
                 <label class="custom-file-label" for="inputGroupFile02">Choose Additional File</label>
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="start-date">Date of initiation</label>
-                <input type="date" class="form-control" name="start_date">
+                <input type="date" class="form-control" name="start_date" required>
               </div>
               <div class="form-group col-md-6">
                 <label for="Dead-line">Deadline</label>
-                <input type="date" class="form-control" name="dead_line">
+                <input type="date" class="form-control" name="dead_line" required>
               </div>
             </div>
             <br />
@@ -459,6 +452,13 @@
   <script src="{% static 'js/demo/chart-1.js' %}"></script>
   <script src="{% static 'vendor/ckeditor/ckeditor.js' %}"></script>
   <script> CKEDITOR.replace('editor1');</script>
+  <script type="text/javascript">
+    $('.custom-file input').change(function (e) {
+        if (e.target.files.length) {
+            $(this).next('.custom-file-label').html(e.target.files[0].name);
+        }
+    });
+</script>
 </body>
 
 </html>
