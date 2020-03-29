@@ -28,7 +28,7 @@ def addproject(request):
         project.date_of_initiation = request.POST['start_date']
         project.deadline = request.POST['dead_line']
         project.save()
-        return render(request, 'dashboard/addproject.html', {'account': account})
+        return render(request, 'dashboard/addproject.html', {'account': account,'project':project})
     else:
         current_user = request.user
         account = get_object_or_404(Account, email=current_user)

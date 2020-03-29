@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
   <title>Add Project</title>
 
@@ -20,6 +21,13 @@
   <!-- Custom styles for this template-->
   <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
 
+  {% if project %}
+  <script>
+    $(window).load(function(){
+        $('#project_added_modal').modal('show');
+    });
+  </script>
+  {% endif %}
 </head>
 
 <body id="page-top">
@@ -309,6 +317,26 @@
           </ul>
 
         </nav>
+
+        <div class="modal fade" id="project_added_modal" tabindex="-1" role="dialog" aria-labelledby="project_added_modal"
+          aria-hidden="true">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title text-success" id="project_added_modal">Project Added Successfully</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">{{ project.project_name }} Project added successfully with Project Id - {{ project.project_id }}</div>
+              <div class="modal-footer">
+                <button class="btn btn-success" type="button" data-dismiss="modal">Ok</button>
+                <a class="btn btn-primary" href="">Add Project Members</a>
+                <a class="btn btn-secondary" href="{% url 'home' %}">Dashboard</a>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div class="container">
           <form class="contact-form" method="post" action="{% url 'addproject' %}" enctype="multipart/form-data">
