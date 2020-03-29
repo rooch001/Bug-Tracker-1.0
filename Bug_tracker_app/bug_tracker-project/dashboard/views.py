@@ -6,8 +6,8 @@ from dashboard.models import Project
 
 def home(request):
     if request.user.is_authenticated:
-        current_user = request.user
         try:
+            current_user = request.user
             account = get_object_or_404(Account, email=current_user)
             return render(request, 'dashboard/home.html', {'account': account})
         except:
