@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'dashboard.apps.DashboardConfig',
     'manage_project.apps.ManageProjectConfig',
     'company_head.apps.CompanyHeadConfig',
+    'profiles.apps.ProfilesConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
