@@ -4,9 +4,12 @@ from django.contrib import auth
 from accounts.models import Account
 
 # Create your views here.
+
+
 def login(request):
     if request.method == 'POST':
-        user = auth.authenticate(username=request.POST['email'],password=request.POST['password'])
+        user = auth.authenticate(
+            username=request.POST['email'], password=request.POST['password'])
         if user is not None:
             auth.login(request, user)
             current_user = request.user
@@ -15,14 +18,15 @@ def login(request):
                 return redirect('home')
             except:
                 auth.logout(request)
-                return render(request, 'accounts/login.html', {'error':'Your profile details are not ready'})
+                return render(request, 'accounts/login.html', {'error': 'Your profile details are not ready'})
         else:
-            return render(request, 'accounts/login.html',{'error':'Email or Password is not correct'})
+            return render(request, 'accounts/login.html', {'error': 'Email or Password is not correct'})
     else:
         if request.user.is_authenticated:
             return redirect('home')
         else:
             return render(request, 'accounts/login.html')
+
 
 def logout(request):
     if request.method == 'POST':
