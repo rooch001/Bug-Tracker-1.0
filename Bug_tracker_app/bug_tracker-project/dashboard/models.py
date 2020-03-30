@@ -14,7 +14,6 @@ class Project(models.Model):
         upload_to='files/additional_file/', null=True)
     date_of_initiation = models.DateField()
     deadline = models.DateField()
-    email = models.ForeignKey(Account)
 
     def __str__(self):
         return self.project_name + "-" + str(self.project_id)
