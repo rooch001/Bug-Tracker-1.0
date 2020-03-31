@@ -6,9 +6,9 @@ from dashboard.models import Project
 
 def home(request):
     if request.user.is_authenticated:
+        current_user = request.user
         try:
-            current_user = request.user
-            account = get_object_or_404(Account, email=current_user)
+            account = get_object_or_404(Account, username=current_user)
             return render(request, 'dashboard/home.html', {'account': account})
         except:
             auth.logout(request)
@@ -18,7 +18,7 @@ def home(request):
 
 def addproject(request):
     current_user = request.user
-    account = get_object_or_404(Account, email=current_user)
+    account = get_object_or_404(Account, username=current_user)
     if request.method == "POST":
         project = Project()
         project.project_name = request.POST["project_name"]
@@ -34,5 +34,5 @@ def addproject(request):
         return render(request, 'dashboard/addproject.html', {'account': account,'project':project})
     else:
         current_user = request.user
-        account = get_object_or_404(Account, email=current_user)
+        account = get_object_or_404(Account, username=current_user)
         return render(request, 'dashboard/addproject.html', {'account': account})

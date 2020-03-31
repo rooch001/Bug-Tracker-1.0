@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Custom fonts for this template-->
+    <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link
+      href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+      rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
+  </head>
+
+    <!-- Bootstrap CSS -->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <title>Bug Tracker-Profile</title>
+
+    <script>
+      function edit_inf()
+      {
+        document.getElementById("inputFirstName").readOnly = false;
+        document.getElementById("inputLastName").readOnly = false;
+        document.getElementById("inputPhoto").disabled = false;
+        document.getElementById("inputEmail4").readOnly = false;
+        document.getElementById("inputAddress").readOnly = false;
+        document.getElementById("inputCity").readOnly = false;
+        document.getElementById("inputState").disabled = false;
+        document.getElementById("inputZip").readOnly = false;
+        document.getElementById("inputAge").readOnly = false;
+        document.getElementById("inputMobile").readOnly = false;
+        document.getElementById("inputJobtitle").readOnly = false;
+        document.getElementById("hide_option").style.display = "none";
+      }
+      function edit_pass()
+      {
+        document.getElementById("inputPasswordCurrent").placeholder = "";
+        document.getElementById("inputPasswordCurrent").readOnly = false;
+        document.getElementById("inputPasswordNew").readOnly = false;
+        document.getElementById("inputPasswordNew2").readOnly = false;
+      }
+    </script>
+
+</head>
+
+<body>
+  <!-- Error Bootstrap Modal -->
+  <!-- Modal -->
+  <div class="modal fade" id="error_modal" tabindex="-1" role="dialog" aria-labelledby="error_modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-danger" id="error_modal">Error</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p class="text-warning">{{ error }}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="container p-0">
+
+        <h1 class="h3 mb-3">Profile</h1>
+
+        <div class="row">
+            <div class="col-md-5 col-xl-4">
+
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Profile Settings</h5>
+                    </div>
+
+                    <div class="list-group list-group-flush" role="tablist">
+                        <a class="list-group-item list-group-item-action active" data-toggle="list" href="#account"
+                            role="tab">
+                            Account
+                        </a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#password"
+                            role="tab">
+                            Password
+                        </a>
+                      {% if user.is_superuser %}
+                        <a class="list-group-item list-group-item-action" href="{% url 'dashboard' %}"
+                            role="tab">
+                            Dashboard
+                        </a>
+                        {% else %}
+                        <a class="list-group-item list-group-item-action" href="{% url 'home' %}"
+                            role="tab">
+                            Dashboard
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-7 col-xl-8">
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="account" role="tabpanel">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-actions float-right">
+                                    <div class="dropdown show">
+                                        <a href="#" data-toggle="dropdown" data-display="static">
+
+
+                                        </a>
+
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                        </div>
+                                    </div>
+                                </div>
+                                <h5 class="card-title mb-0">Personal Information</h5>
+                            </div>
+                            <div class="card-body">
+                                <form method="post" action="{% url 'profiles' %}" enctype="multipart/form-data">
+                                  {% csrf_token %}
+                                    <div class="form-row">
+                                      <div class="col-md-12">
+                                          <div class="text-center">
+                                              <img alt="Himanshu Nagar" src="{{ profile.photo.url }}"
+                                                  class="rounded-circle img-responsive mt-2" width="128" height="128"/>
+                                              <div class="mt-2">
+                                                  <input name="photo" value="{{ profile.photo.url }}" id="inputPhoto" type="file" class="form-control-file-block" disabled>
+                                              </div>
+                                              <small>For best results, use an image at least 128px by 128px in .jpg
+                                                  format</small>
+                                          </div>
+                                      </div>
+                                      <div class="col-md-12">
+                                          <div class="form-group">
+                                              <label for="inputUsername">Username</label>
+                                              <input type="text" class="form-control" id="inputUsername"
+                                                  placeholder="Username" value="{{ profile.username }}" readonly required></input>
+                                          </div>
+                                      </div>
+                                      <div class="form-group col-md-6">
+                                          <label for="inputFirstName">First name</label>
+                                          <input name="first_name" type="text" class="form-control" id="inputFirstName"
+                                              placeholder="First name" value="{{ profile.first_name }}" readonly required>
+                                      </div>
+                                      <div class="form-group col-md-6">
+                                          <label for="inputLastName">Last name</label>
+                                          <input name="last_name" type="text" class="form-control" id="inputLastName"
+                                              placeholder="Last name" value="{{ profile.last_name }}" readonly required>
+                                      </div>
+                                      <div class="col-md-6">
+                                          <div class="form-group">
+                                              <label for="inputAge">Age</label>
+                                              <input name="age" type="number" class="form-control" id="inputAge"
+                                                  placeholder="Age" value="{{ profile.age }}" readonly required></input>
+                                          </div>
+                                      </div>
+                                      <div class="col-md-6">
+                                          <div class="form-group">
+                                              <label for="inputMobile">Mobile</label>
+                                              <input name="mobile" type="text" class="form-control" id="inputMobile"
+                                                  placeholder="Mobile" value="{{ profile.mobile }}" readonly required></input>
+                                          </div>
+                                      </div>
+                                      <div class="col-md-12">
+                                          <div class="form-group">
+                                              <label for="inputJobtitle">Job Title</label>
+                                              <input name="job_title" type="text" class="form-control" id="inputJobtitle"
+                                                  placeholder="Job Title" value="{{ profile.job_title }}" readonly required></input>
+                                          </div>
+                                      </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputEmail4">Email</label>
+                                        <input name="email" type="email" class="form-control" id="inputEmail4" placeholder="Email" value="{{ profile.email }}" readonly required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputAddress">Address</label>
+                                        <input name="address" type="text" class="form-control" id="inputAddress"
+                                            placeholder="Address" readonly value="{{ profile.address }}" required>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="inputCity">City</label>
+                                            <input name="city" type="text" class="form-control" id="inputCity" placeholder="City" value="{{ profile.city }}" readonly required>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="inputState">State</label>
+                                            <select name="state" id="inputState" class="form-control" disabled required>
+                                                <option selected="" id="hide_option">{{ profile.state }}</option>
+                                                <option>Chhatisgarh</option>
+                                                <option>Madhya Pradesh</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label for="inputZip">Zip</label>
+                                            <input name="zip" type="text" class="form-control" id="inputZip" placeholder="Zip" value="{{ profile.zip }}" readonly required>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                    <button onclick="edit_inf()" type="button" class="btn btn-primary">Edit</button>
+                                </form>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="tab-pane fade" id="password" role="tabpanel">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Password</h5>
+
+                                <form method="post" action="{% url 'profiles' %}">
+                                  {% csrf_token %}
+                                    <div class="form-group">
+                                        <label for="inputPasswordCurrent">Current password</label>
+                                        <input name="current_password" type="password" placeholder="********" class="form-control" id="inputPasswordCurrent" readonly required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPasswordNew">New password</label>
+                                        <input name="new_password1" type="password" class="form-control" id="inputPasswordNew" readonly required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPasswordNew2">Verify password</label>
+                                        <input name="new_password2" type="password" class="form-control" id="inputPasswordNew2" readonly required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                    <button onclick="edit_pass()" type="button" class="btn btn-primary">Edit</button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<!--    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>-->
+
+        <!-- Bootstrap core JavaScript-->
+        <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+        <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+        <!-- Core plugin JavaScript-->
+        <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="{% static 'js/sb-admin-2.min.js' %}"></script>
+
+
+        {% if error %}
+        <script>
+          console.log("insidescript")
+          $(document).ready(function(){
+            $('#error_modal').modal('show');
+          });
+        </script>
+        {% endif %}
+</body>
+
+</html>

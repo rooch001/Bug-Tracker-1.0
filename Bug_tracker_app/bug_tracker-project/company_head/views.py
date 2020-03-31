@@ -23,7 +23,7 @@ def dashboard(request):
     if request.user.is_authenticated:
         current_user = request.user
         try:
-            account = get_object_or_404(Account, email=current_user)
+            account = get_object_or_404(Account, username=current_user)
             return render(request, 'company_head/dashhead.html', {'account': account})
         except:
             auth.logout(request)

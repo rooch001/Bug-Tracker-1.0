@@ -9,12 +9,12 @@ from accounts.models import Account
 def login(request):
     if request.method == 'POST':
         user = auth.authenticate(
-            username=request.POST['email'], password=request.POST['password'])
+            username=request.POST['username'], password=request.POST['password'])
         if user is not None:
             auth.login(request, user)
             current_user = request.user
             try:
-                account = get_object_or_404(Account, email=current_user)
+                account = get_object_or_404(Account, username=current_user)
                 return redirect('home')
             except:
                 auth.logout(request)
