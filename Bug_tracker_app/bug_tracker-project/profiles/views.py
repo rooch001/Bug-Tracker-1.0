@@ -4,32 +4,35 @@ from django.contrib import auth
 from accounts.models import Account
 
 # Create your views here.
+
+
 def profiles(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
             try:
                 if request.POST['current_password'] is not None:
-                    p = True;
+                    p = True
             except:
-                p = False;
+                p = False
             if p == True:
-                    if auth.authenticate(username = request.user, password = request.POST['current_password']):
-                        if request.POST['new_password1'] == request.POST['new_password2']:
-                            u = User.objects.get(username__exact=request.user)
-                            u.set_password(request.POST['new_password1'])
-                            u.save()
-                            if u.is_superuser:
-                                auth.logout(request)
-                                return redirect('chlogin')
-                            else:
-                                auth.logout(request)
-                                return redirect('home')
+                if auth.authenticate(username=request.user, password=request.POST['current_password']):
+                    if request.POST['new_password1'] == request.POST['new_password2']:
+                        u = User.objects.get(username__exact=request.user)
+                        u.set_password(request.POST['new_password1'])
+                        u.save()
+                        if u.is_superuser:
+                            auth.logout(request)
+                            return redirect('chlogin')
                         else:
-                            profile = get_object_or_404(Account, username=request.user)
-                            return render(request, 'profiles/profile.html', {'error':'Confirm Password does not match.','profile':profile})
+                            auth.logout(request)
+                            return redirect('home')
                     else:
-                        profile = get_object_or_404(Account, username=request.user)
-                        return render(request, 'profiles/profile.html', {'error':'Password does not match.','profile':profile})
+                        profile = get_object_or_404(
+                            Account, username=request.user)
+                        return render(request, 'profiles/profile.html', {'error': 'Confirm Password does not match.', 'profile': profile})
+                else:
+                    profile = get_object_or_404(Account, username=request.user)
+                    return render(request, 'profiles/profile.html', {'error': 'Password does not match.', 'profile': profile})
             if p == False:
                 profile = get_object_or_404(Account, username=request.user)
                 if request.POST['first_name'] is not None:
@@ -58,10 +61,10 @@ def profiles(request):
                     profile.zip = request.POST['zip']
                 profile.save()
                 profile = get_object_or_404(Account, username=request.user)
-                return render(request, 'profiles/profile.html', {'profile':profile})
+                return render(request, 'profiles/profile.html', {'profile': profile})
         else:
             profile = get_object_or_404(Account, username=request.user)
-            return render(request, 'profiles/profile.html', {'profile':profile})
+            return render(request, 'profiles/profile.html', {'profile': profile})
     else:
         if user.is_superuser:
             return redirect('chlogin')

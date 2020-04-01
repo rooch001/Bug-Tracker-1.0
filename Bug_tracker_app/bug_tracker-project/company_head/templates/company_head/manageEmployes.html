@@ -12,6 +12,12 @@
     <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
     <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="https://editor.datatables.net/extensions/Editor/css/editor.dataTables.min.css" rel="stylesheet"
+        type="text/css">
+    <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css" rel="stylesheet"
+        type="text/css">
 </head>
 
 <body class="sb-nav-fixed">
@@ -63,21 +69,38 @@
             </nav>
         </div>
 
-
         <div id="layoutSidenav_content">
             <!-- CONTENT MAIN -->
             <main>
+                <table id="example" class="display" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>First name</th>
+                            <th>Last name</th>
+                            <th>Position</th>
+                            <th>Office</th>
+                            <th width="18%">Start date</th>
+                            <th>Salary</th>
+                        </tr>
+                    </thead>
+                </table>
 
             </main>
-            <footer class="py-4 bg-light mt-auto">
-                <div class="container-fluid">
-                    <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Bug-Tracker {% now "Y" %}</div>
-
-                    </div>
-                </div>
-            </footer>
         </div>
+    </div>
+    <!-- /.container-fluid -->
+
+    </div>
+    <footer class="py-4 bg-light mt-auto">
+        <div class="container-fluid">
+            <div class="d-flex align-items-center justify-content-between small">
+                <div class="text-muted">Copyright &copy; Bug-Tracker {% now "Y" %}</div>
+
+            </div>
+        </div>
+    </footer>
+    </div>
     </div>
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -115,6 +138,74 @@
     <script src="{% static 'js/demo/datatables-demo.js' %}"></script>
     <script src="{% static 'vendor/fontawesome-free/js/all.min.js' %}" crossorigin="anonymous"></script>
 
+
+    <script>
+        var editor; // use a global for the submit and return data rendering in the examples
+
+        $(document).ready(function () {
+            editor = new $.fn.dataTable.Editor({
+                ajax: "../php/staff.php",
+                table: "#example",
+                fields: [{
+                    label: "First name:",
+                    name: "first_name"
+                }, {
+                    label: "Last name:",
+                    name: "last_name"
+                }, {
+                    label: "Position:",
+                    name: "position"
+                }, {
+                    label: "Office:",
+                    name: "office"
+                }, {
+                    label: "Extension:",
+                    name: "extn"
+                }, {
+                    label: "Start date:",
+                    name: "start_date",
+                    type: "datetime"
+                }, {
+                    label: "Salary:",
+                    name: "salary"
+                }
+                ]
+            });
+
+            // Activate an inline edit on click of a table cell
+            $('#example').on('click', 'tbody td:not(:first-child)', function (e) {
+                editor.inline(this);
+            });
+
+            $('#example').DataTable({
+                dom: "Bfrtip",
+                ajax: "{% url 'ajaxtable' %}"
+                columns: [
+                    {
+                        data: null,
+                        defaultContent: '',
+                        className: 'select-checkbox',
+                        orderable: false
+                    },
+                    { data: "first_name" },
+                    { data: "last_name" },
+                    { data: "position" },
+                    { data: "office" },
+                    { data: "start_date" },
+                    { data: "salary", render: $.fn.dataTable.render.number(',', '.', 0, '$') }
+                ],
+                select: {
+                    style: 'os',
+                    selector: 'td:first-child'
+                },
+                buttons: [
+                    { extend: "create", editor: editor },
+                    { extend: "edit", editor: editor },
+                    { extend: "remove", editor: editor }
+                ]
+            });
+        });
+    </script>
 </body>
 
 </html>

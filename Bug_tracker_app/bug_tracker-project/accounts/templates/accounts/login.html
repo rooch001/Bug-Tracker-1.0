@@ -39,6 +39,7 @@
                   {% endif %}
                   <form method="post" action="{% url 'login' %}">
                     {% csrf_token %}
+                    
                     <div class="form-label-group">
                       <input name="username" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
                       <label for="inputEmail">Email address</label>
@@ -74,10 +75,7 @@
    <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
     <!-- Custom scripts for all pages-->
    <script src="{% static 'js/sb-admin-2.min.js' %}"></script>
-    <!-- Page level plugins -->
-   <script src="{% static 'vendor/chart.js/Chart.min.js' %}"></script>
-    <!-- Page level custom scripts -->
-   <script src="{% static 'js/demo/chart-1.js' %}"></script>
+
 
 </body>
 
