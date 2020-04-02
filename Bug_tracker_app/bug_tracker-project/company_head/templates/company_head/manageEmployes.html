@@ -72,6 +72,7 @@
         <div id="layoutSidenav_content">
             <!-- CONTENT MAIN -->
             <main>
+                {% block content %}
                 <table id="example" class="display" cellspacing="0" width="100%">
                     <thead>
                         <tr>
@@ -85,7 +86,7 @@
                         </tr>
                     </thead>
                 </table>
-
+                {% endblock %}
             </main>
         </div>
     </div>
