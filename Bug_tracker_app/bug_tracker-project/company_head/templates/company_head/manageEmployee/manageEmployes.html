@@ -131,104 +131,210 @@
     </div>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">×</span></button>
-                <h4 class="modal-title" id="myModalLabel">Update User</h4>
+
+            <!-- Modal Header -->
+            <div class="modal-header" style="color:#f0ad4e;">
+                <h4 class="modal-title">Update Information</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-            <form id="updateUser" action="">
-                <div class="modal-body">
-                    <input class="form-control" id="form-id" type="hidden" name="formId" />
-                    <label for="name">Name</label>
-                    <input class="form-control" id="form-name" type="text" name="formName" />
-                    <label for="address">Address</label>
-                    <input class="form-control" id="form-address" type="text" name="formAddress" />
-                    <label for="age">Age</label>
-                    <input class="form-control" id="form-age" type="number" name="formAge" min=10 max=100 />
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </form>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form id="updateUser" action="">
+                    <input class="form-control" id="empid" type="hidden" name="empid" />
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="forfirstname">First-Name</label>
+                            <input type="text" class="form-control" name="firstname" placeholder="Roochin">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="forlastname">Last-Name</label>
+                            <input type="text" class="form-control" name="lastname" placeholder="Dwivedi">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6"">
+                        <label for=" forage">Age</label>
+                            <input type="number" class="form-control" name="age" placeholder="21">
+                        </div>
+                        <div class="form-group col-md-6"">
+                        <label for=" formobile">Mobile</label>
+                            <input type="number" class="form-control" name="mobile" placeholder="7415140895">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="forjobtitle">Job Title</label>
+                            <select name="jobtitle" class="form-control">
+                                <option value="Project Manager">Project Manager</option>
+                                <option value="Software Developer-I">Software Developer-I</option>
+                                <option value="Software Developer-II">Software Developer-II</option>
+                                <option value="Software Developer-III">Software Developer-III</option>
+                                <option value="Software Developer-IV">Software Developer-IV</option>
+                                <option value="CTO">CTO</option>
+                                <option value="Quality Assurance">Quality Assurance</option>
+                                <option value="Senior Human Resource">Senior Human Resource</option>
+                                <option value="Human Resource">Human Resource</option>
+
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="foremail">Email</label>
+                            <input type="email" class="form-control" name="email"
+                                placeholder="dwivediroochin@gmail.com">
+                        </div>
+                    </div>
+                    <div class="form-row">
+
+                        <div class="col-4">
+                            <label for="forcity">City</label>
+                            <input type="text" class="form-control" name="city" ,placeholder="Indore">
+                        </div>
+                        <div class="col-4">
+                            <label for="forState">State</label>
+                            <select name="state" class="form-control">
+                                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                <option value="Assam">Assam</option>
+                                <option value="Bihar">Bihar</option>
+                                <option value="Chandigarh">Chandigarh</option>
+                                <option value="Chhattisgarh">Chhattisgarh</option>
+                                <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
+                                <option value="Daman and Diu">Daman and Diu</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="Lakshadweep">Lakshadweep</option>
+                                <option value="Puducherry">Puducherry</option>
+                                <option value="Goa">Goa</option>
+                                <option value="Gujarat">Gujarat</option>
+                                <option value="Haryana">Haryana</option>
+                                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                                <option value="Jharkhand">Jharkhand</option>
+                                <option value="Karnataka">Karnataka</option>
+                                <option value="Kerala">Kerala</option>
+                                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                <option value="Maharashtra">Maharashtra</option>
+                                <option value="Manipur">Manipur</option>
+                                <option value="Meghalaya">Meghalaya</option>
+                                <option value="Mizoram">Mizoram</option>
+                                <option value="Nagaland">Nagaland</option>
+                                <option value="Odisha">Odisha</option>
+                                <option value="Punjab">Punjab</option>
+                                <option value="Rajasthan">Rajasthan</option>
+                                <option value="Sikkim">Sikkim</option>
+                                <option value="Tamil Nadu">Tamil Nadu</option>
+                                <option value="Telangana">Telangana</option>
+                                <option value="Tripura">Tripura</option>
+                                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                <option value="Uttarakhand">Uttarakhand</option>
+                                <option value="West Bengal">West Bengal</option>
+                            </select>
+                        </div>
+                        <div class="col-4">
+                            <label for="forzip">Zip</label>
+                            <input type="number" class="form-control" name="zip" placeholder="452005">
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-warning">Save changes</button>
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+            </div>
+
         </div>
     </div>
 </div>
-
-
 {% endblock content %}
-
-
-
-
 {% comment %} Script {% endcomment %}
 {% block javascript %}
 
-
-
-<!-- <script>
+<script>
     // Create Django Ajax Call
-    $("form#addUser").submit(function () {
-        var nameInput = $('input[name="name"]').val().trim();
-        var addressInput = $('input[name="address"]').val().trim();
-        var ageInput = $('input[name="age"]').val().trim();
-        if (nameInput && addressInput && ageInput) {
-            // Create Ajax Call
+    //     $("form#addUser").submit(function () {
+    //         var nameInput = $('input[name="name"]').val().trim();
+    //         var addressInput = $('input[name="address"]').val().trim();
+    //         var ageInput = $('input[name="age"]').val().trim();
+    //         if (nameInput && addressInput && ageInput) {
+    //             // Create Ajax Call
 
-            $.ajax({
-                url: '{% url "createEmployee" %}',
-                data: {
-                    'name': nameInput,
-                    'address': addressInput,
-                    'age': ageInput
-                },
-                dataType: 'json',
-                success: function (data) {
-                    if (data.user) {
-                        appendToUsrTable(data.user);
-                    }
-                }
-            });
-        } else {
-            alert("All fields must have a valid value.");
-        }
-        $('form#addUser').trigger("reset");
-        return false;
-    });
-    function appendToUsrTable(user) {
-        $("#userTable > tbody:last-child").append(`
-        <tr id="user-${user.id}">
-            <td class="userName" name="name">${user.name}</td>
-            '<td class="userAddress" name="address">${user.address}</td>
-            '<td class="userAge" name="age">${user.age}</td>
-            '<td align="center">
-                <button class="btn btn-success form-control" onClick="editUser(${user.id})" data-toggle="modal" data-target="#myModal")">EDIT</button>
-            </td>
-            <td align="center">
-                <button class="btn btn-danger form-control" onClick="deleteUser(${user.id})">DELETE</button>
-            </td>
-        </tr>
-    `);
-    }
+    //             $.ajax({
+    //                 url: '{% url "createEmployee" %}',
+    //                 data: {
+    //                     'name': nameInput,
+    //                     'address': addressInput,
+    //                     'age': ageInput
+    //                 },
+    //                 dataType: 'json',
+    //                 success: function (data) {
+    //                     if (data.user) {
+    //                         appendToUsrTable(data.user);
+    //                     }
+    //                 }
+    //             });
+    //         } else {
+    //             alert("All fields must have a valid value.");
+    //         }
+    //         $('form#addUser').trigger("reset");
+    //         return false;
+    //     });
+    //     function appendToUsrTable(user) {
+    //         $("#userTable > tbody:last-child").append(`
+    // <tr id="user-${user.id}">
+    //     <td class="userName" name="name">${user.name}</td>
+    //     '<td class="userAddress" name="address">${user.address}</td>
+    //     '<td class="userAge" name="age">${user.age}</td>
+    //     '<td align="center">
+    //         <button class="btn btn-success form-control" onClick="editUser(${user.id})" data-toggle="modal"
+    //             data-target="#myModal" )">EDIT</button>
+    //     </td>
+    //     <td align="center">
+    //         <button class="btn btn-danger form-control" onClick="deleteUser(${user.id})">DELETE</button>
+    //     </td>
+    // </tr>
+    // `);
+    //     }
 
 
     $("form#updateUser").submit(function () {
-        var idInput = $('input[name="formId"]').val().trim();
-        var nameInput = $('input[name="formName"]').val().trim();
-        var addressInput = $('input[name="formAddress"]').val().trim();
-        var ageInput = $('input[name="formAge"]').val().trim();
-        if (nameInput && addressInput && ageInput) {
+        var idInput = $('input[name="empid"]').val().trim();
+        var firstnameInput = $('input[name="firstname"]').val().trim();
+        var lastnameInput = $('input[name="lastname"]').val().trim();
+        var ageInput = $('input[name="age"]').val().trim();
+        var mobileInput = $('input[name="mobile"]').val().trim();
+        var jobtitleInput = $('input[name="jobtitle"]').val().trim();
+        var emailInput = $('input[name="email"]').val().trim();
+        var addressInput = $('input[name="address"]').val().trim();
+        var cityInput = $('input[name="city"]').val().trim();
+        var stateInput = $('input[name="state"]').val().trim();
+        var zipInput = $('input[name="zip"]').val().trim();
+        console.log("HJSH")
+        if (firstnameInput && lastnameInput && ageInput && mobileInput && jobtitleInput && emailInput && addressInput && cityInput && stateInput && zipInput) {
             // Create Ajax Call
+            console.log("YES")
             $.ajax({
                 url: '{% url "updateEmployee" %}',
                 data: {
                     'id': idInput,
-                    'name': nameInput,
+                    'firstname': firstnameInput,
+                    'lastname': lastnameInput,
+                    'age': ageInput,
+                    'mobile': mobileInput,
+                    'jobtitle': jobtitleInput,
+                    'email': emailInput,
                     'address': addressInput,
-                    'age': ageInput
+                    'city': cityInput,
+                    'state': stateInput,
+                    'zip': zipInput,
                 },
                 dataType: 'json',
                 success: function (data) {
@@ -270,24 +376,24 @@
             }
         });
     }
-    function deleteUser(id) {
-        var action = confirm("Are you sure you want to delete this user?");
-        if (action != false) {
-            $.ajax({
-                url: '{% url "deleteEmployee" %}',
-                data: {
-                    'id': id,
-                },
-                dataType: 'json',
-                success: function (data) {
-                    if (data.deleted) {
-                        $("#userTable #user-" + id).remove();
-                    }
-                }
-            });
-        }
-    }
-</script> -->
+    // function deleteUser(id) {
+    //     var action = confirm("Are you sure you want to delete this user?");
+    //     if (action != false) {
+    //         $.ajax({
+    //             url: '{% url "deleteEmployee" %}',
+    //             data: {
+    //                 'id': id,
+    //             },
+    //             dataType: 'json',
+    //             success: function (data) {
+    //                 if (data.deleted) {
+    //                     $("#userTable #user-" + id).remove();
+    //                 }
+    //             }
+    //         });
+    //     }
+    // }
+</script>
 <!-- <script type="text/javascript" src="{% static 'vendor/datatable/datatables.js' %}"></script> -->
 
 <script type="text/javascript" src="{% static 'vendor/dataTable/datatables.min.js' %}"></script>
