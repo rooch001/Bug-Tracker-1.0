@@ -42,7 +42,7 @@ def addemployee(request):
 
 
 def manageemployes(request):
-    return render(request, 'company_head/manageEmployes.html')
+    return render(request, 'company_head/manageEmployee/manageEmployes.html')
 
 
 def chlogout(request):
@@ -51,87 +51,108 @@ def chlogout(request):
         return redirect('chlogin')
 
 
-# class employeeView(ListView):
-#     model = Account
-#     template_name = 'manageEmployes.html'
-#     context_object_name = 'users'
-#
-#
-# class createEmployee(View):
-#     def get(self, request):
-#         name1 = request.GET.get('name', None)
-#         address1 = request.GET.get('address', None)
-#         age1 = request.GET.get('age', None)
-#
-#         obj = Account.objects.create(
-#             name=name1,
-#             address=address1,
-#             age=age1
-#         )
-#         user = {'id': obj.id, 'name': obj.name,
-#                 'address': obj.address, 'age': obj.age}
-#
-#         data = {
-#             'user': user
-#         }
-#         return JsonResponse(data)
-#
-#
-# class updateEmployee(View):
-#     def get(self, request):
-#         id1 = request.GET.get('id', None)
-#         name1 = request.GET.get('name', None)
-#         address1 = request.GET.get('address', None)
-#         age1 = request.GET.get('age', None)
-#
-#         obj = Account.objects.get(id=id1)
-#         obj.name = name1
-#         obj.address = address1
-#         obj.age = age1
-#
-#         obj.save()
-#
-#         user = {'id': obj.id, 'name': obj.name,
-#                 'address': obj.address, 'age': obj.age}
-#
-#         data = {
-#             'user': user
-#         }
-#         return JsonResponse(data)
-#
-#
-# class deleteEmployee(View):
-#     def get(self, request):
-#         id1 = request.GET.get('id', None)
-#         Account.objects.get(id=id1).delete()
-#         data = {
-#             'deleted': True
-#         }
-#         return JsonResponse(data)
+class employeeView(ListView):
+    model = Account
+    template_name = 'company_head/manageEmployee/manageEmployes.html'
+    context_object_name = 'users'
 
-    # def get(self, request):
-    #     emp_id1 = request.GET.get('emp_id', None)
-    #     first_name1 = request.GET.get('first_name', None)
-    #     last_name1 = request.GET.get('last_name', None)
-    #     age1 = request.GET.get('age', None)
-    #     mobile1 = request.GET.get('mobile', None)
-    #     job_title1 = request.GET.get('job_title', None)
-    #     email1 = request.GET.get('email', None)
-    #     address1 = request.GET.get('address', None)
-    #     city1 = request.GET.get('city', None)
-    #     state1 = request.GET.get('state', None)
-    #     zip1 = request.GET.get('zip', None)
 
-    # obj = Account.objects.create(
-    #     emp_id=emp_id1,
-    #     first_name=first_name1,
-    #     last_name=last_name1,
-    #     age=age1,
-    #     mobile=mobile1,
-    #     job_title=job_title1,
-    #     email=email1,
-    #     address=address1,
-    #     city=city1,
-    #     state=state1,
-    #     zip=zip1
-    # )
+class createEmployee(View):
+    def get(self, request):
+        emp_id1 = request.GET.get('emp_id', None)
+        first_name1 = request.GET.get('first_name', None)
+        last_name1 = request.GET.get('last_name', None)
+        age1 = request.GET.get('age', None)
+        mobile1 = request.GET.get('mobile', None)
+        job_title1 = request.GET.get('job_title', None)
+        email1 = request.GET.get('email', None)
+        address1 = request.GET.get('address', None)
+        city1 = request.GET.get('city', None)
+        state1 = request.GET.get('state', None)
+        zip1 = request.GET.get('zip', None)
+
+        obj = Account.objects.create(
+            emp_id=emp_id1,
+            first_name=first_name1,
+            last_name=last_name1,
+            age=age1,
+            mobile=mobile1,
+            job_title=job_title1,
+            email=email1,
+            address=address1,
+            city=city1,
+            state=state1,
+            zip=zip1
+        )
+        user = {'id': obj.emp_id,
+                'firstname': obj.first_name,
+                'lastname': obj.last_name,
+                'age': obj.age,
+                'mobile': obj.mobile,
+                'jobtitle': obj.job_title,
+                'email': obj.email,
+                'address': obj.address,
+                'city': obj.city,
+                'state': obj.state,
+                'zip': obj.zip,
+                }
+
+        data = {
+            'user': user
+        }
+        return JsonResponse(data)
+
+
+class updateEmployee(View):
+    def get(self, request):
+        emp_id1 = request.GET.get('emp_id', None)
+        first_name1 = request.GET.get('first_name', None)
+        last_name1 = request.GET.get('last_name', None)
+        age1 = request.GET.get('age', None)
+        mobile1 = request.GET.get('mobile', None)
+        job_title1 = request.GET.get('job_title', None)
+        email1 = request.GET.get('email', None)
+        address1 = request.GET.get('address', None)
+        city1 = request.GET.get('city', None)
+        state1 = request.GET.get('state', None)
+        zip1 = request.GET.get('zip', None)
+
+        obj = Account.objects.create(
+            emp_id=emp_id1,
+            first_name=first_name1,
+            last_name=last_name1,
+            age=age1,
+            mobile=mobile1,
+            job_title=job_title1,
+            email=email1,
+            address=address1,
+            city=city1,
+            state=state1,
+            zip=zip1
+        )
+        user = {'id': obj.emp_id,
+                'firstname': obj.first_name,
+                'lastname': obj.last_name,
+                'age': obj.age,
+                'mobile': obj.mobile,
+                'jobtitle': obj.job_title,
+                'email': obj.email,
+                'address': obj.address,
+                'city': obj.city,
+                'state': obj.state,
+                'zip': obj.zip,
+                }
+        data = {
+            'user': user
+        }
+        return JsonResponse(data)
+
+
+class deleteEmployee(View):
+    def get(self, request):
+        id1 = request.GET.get('emp_id', None)
+        Account.objects.get(emp_id=id1).delete()
+        data = {
+            'deleted': True
+        }
+        return JsonResponse(data)

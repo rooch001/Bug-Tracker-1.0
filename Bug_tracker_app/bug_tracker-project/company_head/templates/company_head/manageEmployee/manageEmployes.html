@@ -1,0 +1,323 @@
+{% extends "baseA.html" %}
+{% load static %}
+{% comment %} Title {% endcomment %}
+{% block title %} Manage Employees {% endblock title %}
+{% comment %} Css Files {% endcomment %}
+
+{% block stylesheet %}
+
+<link href="{% static 'vendor/dataTable/datatables.min.css' %}" rel="stylesheet" type="text/css" />
+
+
+
+{% endblock stylesheet %}
+
+
+{% comment %} Content {% endcomment %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        {% comment %} <div class="col-md-4 "> {% endcomment %}
+            {% comment %} <h3>ADD USER</h3>
+            <form id="addUser" action="">
+                <div class="form-group">
+                    <input class="form-control" type="text" name="firstname" placeholder="firstname" required>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="lastname" placeholder="lastname" required>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="number" name="age" placeholder="age" required>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="number" name="mobile" placeholder="mobile" required>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="jobtitle" placeholder="jobtitle" required>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="email" placeholder="email" required>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="address" placeholder="address" required>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="city" placeholder="city" required>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="state" placeholder="state" required>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="number" name="zip" placeholder="zip" required>
+                </div>
+
+                <button class="btn btn-primary form-control" type="submit">SUBMIT</button>
+            </form> {% endcomment %}
+            {% comment %}
+        </div> {% endcomment %}
+        <div class="col-md-12">
+            <br>
+            <div class="row">
+                <div class="col-md-4">
+                    <h3>Manage Members</h3>
+                </div>
+                <div class="col-md-4 offset-md-4">
+                    <button type=" button" class="btn btn-outline-secondary"><i class="fas fa-user-edit"></i> Add
+                        Members</button>
+                </div>
+            </div>
+            <br>
+
+            <table id="table_id" class="display" style="width:100%">
+
+                <thead>
+
+                    <tr>
+                        <th>Select</th>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>Age</th>
+                        <th>Mobile</th>
+                        <th>Job Title</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Zip</th>
+                        <th>Actions</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% if users %}
+                    {% for user in users %}
+                    <tr id="user-{{user.emp_id}}">
+                        <td class="userBox userData"></td>
+                        <td class="userfirstname userData" name="firstname">{{user.first_name}}</td>
+                        <td class="userlastname userData" name="lastname">{{user.last_name}}</td>
+                        <td class="userage userData" name="age">{{user.age}}</td>
+                        <td class="usermobile userData" name="mobile">{{user.mobile}}</td>
+                        <td class="userjobtitle userData" name="jobtitle">{{user.job_title}}</td>
+                        <td class="useremail userData" name="email">{{user.email}}</td>
+                        <td class="useraddress userData" name="address">{{user.address}}</td>
+                        <td class="usercity userData" name="city">{{user.city}}</td>
+                        <td class="userstate userData" name="state">{{user.state}}</td>
+                        <td class="userzip userData" name="zip">{{user.zip}}</td>
+                        <td align="center">
+
+                            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                                <div class="btn-group mr-2" role="group" aria-label="First group">
+
+                                    <button type="button" class="btn btn-warning mr-1"
+                                        onClick="editUser({{user.emp_id}})" data-toggle="modal" data-target="#myModal"
+                                        )"><i class="fas fa-user-edit"></i></button>
+                                    <button type="button" class="btn btn-danger" onClick="deleteUser({{user.emp_id}})">
+                                        <i class="far fa-trash-alt"></i>
+                                        </i> </button>
+
+                                </div>
+
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                    No Users
+                    {% endif %}
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="myModalLabel">Update User</h4>
+            </div>
+            <form id="updateUser" action="">
+                <div class="modal-body">
+                    <input class="form-control" id="form-id" type="hidden" name="formId" />
+                    <label for="name">Name</label>
+                    <input class="form-control" id="form-name" type="text" name="formName" />
+                    <label for="address">Address</label>
+                    <input class="form-control" id="form-address" type="text" name="formAddress" />
+                    <label for="age">Age</label>
+                    <input class="form-control" id="form-age" type="number" name="formAge" min=10 max=100 />
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
+
+
+
+
+{% comment %} Script {% endcomment %}
+{% block javascript %}
+
+
+
+<!-- <script>
+    // Create Django Ajax Call
+    $("form#addUser").submit(function () {
+        var nameInput = $('input[name="name"]').val().trim();
+        var addressInput = $('input[name="address"]').val().trim();
+        var ageInput = $('input[name="age"]').val().trim();
+        if (nameInput && addressInput && ageInput) {
+            // Create Ajax Call
+
+            $.ajax({
+                url: '{% url "createEmployee" %}',
+                data: {
+                    'name': nameInput,
+                    'address': addressInput,
+                    'age': ageInput
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.user) {
+                        appendToUsrTable(data.user);
+                    }
+                }
+            });
+        } else {
+            alert("All fields must have a valid value.");
+        }
+        $('form#addUser').trigger("reset");
+        return false;
+    });
+    function appendToUsrTable(user) {
+        $("#userTable > tbody:last-child").append(`
+        <tr id="user-${user.id}">
+            <td class="userName" name="name">${user.name}</td>
+            '<td class="userAddress" name="address">${user.address}</td>
+            '<td class="userAge" name="age">${user.age}</td>
+            '<td align="center">
+                <button class="btn btn-success form-control" onClick="editUser(${user.id})" data-toggle="modal" data-target="#myModal")">EDIT</button>
+            </td>
+            <td align="center">
+                <button class="btn btn-danger form-control" onClick="deleteUser(${user.id})">DELETE</button>
+            </td>
+        </tr>
+    `);
+    }
+
+
+    $("form#updateUser").submit(function () {
+        var idInput = $('input[name="formId"]').val().trim();
+        var nameInput = $('input[name="formName"]').val().trim();
+        var addressInput = $('input[name="formAddress"]').val().trim();
+        var ageInput = $('input[name="formAge"]').val().trim();
+        if (nameInput && addressInput && ageInput) {
+            // Create Ajax Call
+            $.ajax({
+                url: '{% url "updateEmployee" %}',
+                data: {
+                    'id': idInput,
+                    'name': nameInput,
+                    'address': addressInput,
+                    'age': ageInput
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.user) {
+                        updateToUserTabel(data.user);
+                    }
+                }
+            });
+        } else {
+            alert("All fields must have a valid value.");
+        }
+        $('form#updateUser').trigger("reset");
+        $('#myModal').modal('hide');
+        return false;
+    });
+
+    // Update Django Ajax Call
+    function editUser(id) {
+        if (id) {
+            tr_id = "#user-" + id;
+            name = $(tr_id).find(".userName").text();
+            address = $(tr_id).find(".userAddress").text();
+            age = $(tr_id).find(".userAge").text();
+            $('#form-id').val(id);
+            $('#form-name').val(name);
+            $('#form-address').val(address);
+            $('#form-age').val(age);
+        }
+    }
+    function updateToUserTabel(user) {
+        $("#userTable #user-" + user.id).children(".userData").each(function () {
+            var attr = $(this).attr("name");
+            if (attr == "name") {
+                $(this).text(user.name);
+            } else if (attr == "address") {
+                $(this).text(user.address);
+            } else {
+                $(this).text(user.age);
+            }
+        });
+    }
+    function deleteUser(id) {
+        var action = confirm("Are you sure you want to delete this user?");
+        if (action != false) {
+            $.ajax({
+                url: '{% url "deleteEmployee" %}',
+                data: {
+                    'id': id,
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.deleted) {
+                        $("#userTable #user-" + id).remove();
+                    }
+                }
+            });
+        }
+    }
+</script> -->
+<!-- <script type="text/javascript" src="{% static 'vendor/datatable/datatables.js' %}"></script> -->
+
+<script type="text/javascript" src="{% static 'vendor/dataTable/datatables.min.js' %}"></script>
+
+
+<script>
+    $(document).ready(function () {
+        $('#table_id').DataTable();
+    });
+</script>
+<script>
+    $('#table_id').DataTable({
+        // select: 'single',
+        // responsive: true,
+        // keys: true,
+
+        fixedHeader: true,
+        columnDefs: [{
+            orderable: false,
+            className: 'select-checkbox',
+            targets: 0
+        }],
+        select: {
+            style: 'os',
+            selector: 'td:first-child'
+        },
+        order: [[1, 'asc']],
+
+    });
+</script>
+
+
+{% endblock javascript %}
