@@ -6,6 +6,7 @@ urlpatterns = [
     path('dashboard', views.dashboard, name='dashboard'),
     path('addemployee', views.addemployee, name='addemployee'),
     path('chlogout', views.chlogout, name='chlogout'),
+    path('manageemployes', views.manageemployes, name='manageemployes'),
     # path('manageEmployes/create',
     #      views.createEmployee.as_view(), name='createEmployee'),
     # path('manageEmployes/update',

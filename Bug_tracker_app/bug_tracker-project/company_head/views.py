@@ -51,63 +51,63 @@ def chlogout(request):
         return redirect('chlogin')
 
 
-class employeeView(ListView):
-    model = Account
-    template_name = 'manageEmployes.html'
-    context_object_name = 'users'
-
-
-class createEmployee(View):
-    def get(self, request):
-        name1 = request.GET.get('name', None)
-        address1 = request.GET.get('address', None)
-        age1 = request.GET.get('age', None)
-
-        obj = Account.objects.create(
-            name=name1,
-            address=address1,
-            age=age1
-        )
-        user = {'id': obj.id, 'name': obj.name,
-                'address': obj.address, 'age': obj.age}
-
-        data = {
-            'user': user
-        }
-        return JsonResponse(data)
-
-
-class updateEmployee(View):
-    def get(self, request):
-        id1 = request.GET.get('id', None)
-        name1 = request.GET.get('name', None)
-        address1 = request.GET.get('address', None)
-        age1 = request.GET.get('age', None)
-
-        obj = Account.objects.get(id=id1)
-        obj.name = name1
-        obj.address = address1
-        obj.age = age1
-
-        obj.save()
-
-        user = {'id': obj.id, 'name': obj.name,
-                'address': obj.address, 'age': obj.age}
-
-        data = {
-            'user': user
-        }
-        return JsonResponse(data)
-
-
-class deleteEmployee(View):
-    def get(self, request):
-        id1 = request.GET.get('id', None)
-        Account.objects.get(id=id1).delete()
-        data = {
-            'deleted': True
-        }
-        return JsonResponse(data)
+# class employeeView(ListView):
+#     model = Account
+#     template_name = 'manageEmployes.html'
+#     context_object_name = 'users'
+#
+#
+# class createEmployee(View):
+#     def get(self, request):
+#         name1 = request.GET.get('name', None)
+#         address1 = request.GET.get('address', None)
+#         age1 = request.GET.get('age', None)
+#
+#         obj = Account.objects.create(
+#             name=name1,
+#             address=address1,
+#             age=age1
+#         )
+#         user = {'id': obj.id, 'name': obj.name,
+#                 'address': obj.address, 'age': obj.age}
+#
+#         data = {
+#             'user': user
+#         }
+#         return JsonResponse(data)
+#
+#
+# class updateEmployee(View):
+#     def get(self, request):
+#         id1 = request.GET.get('id', None)
+#         name1 = request.GET.get('name', None)
+#         address1 = request.GET.get('address', None)
+#         age1 = request.GET.get('age', None)
+#
+#         obj = Account.objects.get(id=id1)
+#         obj.name = name1
+#         obj.address = address1
+#         obj.age = age1
+#
+#         obj.save()
+#
+#         user = {'id': obj.id, 'name': obj.name,
+#                 'address': obj.address, 'age': obj.age}
+#
+#         data = {
+#             'user': user
+#         }
+#         return JsonResponse(data)
+#
+#
+# class deleteEmployee(View):
+#     def get(self, request):
+#         id1 = request.GET.get('id', None)
+#         Account.objects.get(id=id1).delete()
+#         data = {
+#             'deleted': True
+#         }
+#         return JsonResponse(data)
 
     # def get(self, request):
     #     emp_id1 = request.GET.get('emp_id', None)
